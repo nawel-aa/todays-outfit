@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_12_183551) do
+ActiveRecord::Schema.define(version: 2021_01_12_205654) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,14 +70,17 @@ ActiveRecord::Schema.define(version: 2021_01_12_183551) do
   end
 
   create_table "worn", force: :cascade do |t|
-    t.bigint "item_id", null: false
     t.bigint "outfit_id", null: false
     t.boolean "rejected", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_worn_on_user_id"
   end
 
   add_foreign_key "categories", "users"
   add_foreign_key "items", "users"
   add_foreign_key "outfits", "users"
+  add_foreign_key "worn", "outfits"
+  add_foreign_key "worn", "users"
 end

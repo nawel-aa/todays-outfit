@@ -8,16 +8,11 @@
 
 require 'faker'
 
-puts "Destroying items, outfits and categories..."
-Item.destroy_all
-Outfit.destroy_all
-Category.destroy_all
+puts "Destroying users, items, outfits and categories..."
+User.destroy_all
 
-puts "Creating categories..."
-categories = ["Comfy stuff", "Serious sh*t", "Shiny party bling", "Sweat absorbant"]
-categories.each do |category|
-  Category.create!(name: category)
-end
+puts "Creating a user..."
+user = User.create!(email: "nawel@email.com", password: "123456")
 
 ####################################
 #              ITEMS
@@ -29,7 +24,7 @@ puts "Creating items..."
   Item.create!(
     name: "#{Faker::Commerce.unique.product_name} Top",
     item_type: "Top",
-    user: User.first
+    user: user
   )
 end
 Faker::UniqueGenerator.clear
@@ -39,7 +34,7 @@ Faker::UniqueGenerator.clear
   Item.create!(
     name: "#{Faker::Commerce.unique.product_name} Bottom",
     item_type: "Bottom",
-    user: User.first
+    user: user
   )
 end
 Faker::UniqueGenerator.clear
@@ -49,7 +44,7 @@ Faker::UniqueGenerator.clear
   Item.create!(
     name: "#{Faker::Commerce.unique.product_name} Dress",
     item_type: "Full body",
-    user: User.first
+    user: user
   )
 end
 Faker::UniqueGenerator.clear
@@ -59,7 +54,7 @@ Faker::UniqueGenerator.clear
   Item.create!(
     name: "#{Faker::Games::Pokemon.unique.name} Accessory",
     item_type: "Accessory",
-    user: User.first
+    user: user
   )
 end
 Faker::UniqueGenerator.clear
@@ -69,7 +64,7 @@ Faker::UniqueGenerator.clear
   Item.create!(
     name: "#{Faker::Color.unique.color_name} Underwear",
     item_type: "Underwear",
-    user: User.first
+    user: user
   )
 end
 Faker::UniqueGenerator.clear
@@ -79,7 +74,7 @@ Faker::UniqueGenerator.clear
   Item.create!(
     name: "#{Faker::Commerce.unique.material} shoes",
     item_type: "Shoes",
-    user: User.first
+    user: user
   )
 end
 Faker::UniqueGenerator.clear
@@ -95,9 +90,9 @@ weather = %w[rainy cold hot snowy]
 20.times do
   Outfit.create!(
     name: "#{Faker::Dessert.unique.flavor} outfit",
-    category: Category.find_by(name: categories.sample),
+    category: Category.all.sample,
     weather: weather.sample,
-    user: User.first
+    user: user
   )
 end
 

@@ -24,6 +24,7 @@ gem 'jbuilder', '~> 2.7'
 
 gem 'autoprefixer-rails'
 gem 'devise'
+gem 'pundit'
 gem 'react-rails'
 
 # Use Active Storage variant
