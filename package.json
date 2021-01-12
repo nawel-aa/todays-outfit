@@ -16,6 +16,7 @@
     "react_ujs": "^2.6.1",
     "turbolinks": "^5.2.0"
   },
+  "license": "UNLICENSED",
   "version": "0.1.0",
   "devDependencies": {
     "webpack-dev-server": "^3.11.1"
