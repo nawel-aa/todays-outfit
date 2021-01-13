@@ -15,6 +15,7 @@ puts "Creating a user..."
 user = User.new(email: "nawel@email.com", password: "123456")
 user.skip_confirmation!
 user.save!
+Category.create_default(user)
 
 ####################################
 #              ITEMS
@@ -90,12 +91,16 @@ puts "Creating outfits..."
 weather = %w[rainy cold hot snowy]
 
 20.times do
-  Outfit.create!(
+  outfit = Outfit.new(
     name: "#{Faker::Dessert.unique.flavor} outfit",
-    category: Category.all.sample,
     weather: weather.sample,
     user: user
   )
+  first_random_category = Category.all.sample
+  second_random_category = Category.all.reject{ |category| category == first_random_category }.sample
+  outfit.categories << first_random_category
+  outfit.categories << second_random_category
+  outfit.save!
 end
 
 
