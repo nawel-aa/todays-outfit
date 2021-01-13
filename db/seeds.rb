@@ -12,7 +12,9 @@ puts "Destroying users, items, outfits and categories..."
 User.destroy_all
 
 puts "Creating a user..."
-user = User.create!(email: "nawel@email.com", password: "123456")
+user = User.new(email: "nawel@email.com", password: "123456")
+user.skip_confirmation!
+user.save!
 
 ####################################
 #              ITEMS
