@@ -6,5 +6,5 @@ class Outfit < ApplicationRecord
 
   validates :weather, inclusion: {
     in: %w[rainy cold hot snowy]
-  }
+  }, allow_nil: true
 end
