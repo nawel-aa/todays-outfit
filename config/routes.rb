@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :items, except: %i[edit new]
       resources :outfits, except: %i[edit new]
       resources :categories, only: %i[index create destroy]
+      resources :worn, only: %i[index create]
     end
   end
 end

@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
 
+  # To make authenticated API calls (update, delete, create)
+  acts_as_token_authenticatable
+
   has_many :items, dependent: :destroy
   has_many :worn, dependent: :destroy
   has_many :categories, dependent: :destroy
