@@ -1,1 +1,5 @@
-json.array! @items, :id, :name, :item_type, :photo, :outfits, :created_at, :updated_at
+json.array! @items do |item|
+  json.extract! item, :id, :name, :item_type, :photo
+  json.outfits item.outfits, :id, :name
+  json.extract! item, :created_at, :updated_at
+end
