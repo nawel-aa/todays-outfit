@@ -1,7 +1,7 @@
 class OutfitPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.where(user: user).includes(:categories, :items)
+      scope.where(user: user)
     end
   end
 

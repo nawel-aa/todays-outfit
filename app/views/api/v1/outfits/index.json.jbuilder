@@ -1,4 +1,3 @@
-
 json.array! @outfits do |outfit|
   json.extract! outfit, :id, :name
   json.categories outfit.categories, :id, :name

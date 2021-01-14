@@ -11,7 +11,7 @@ class Api::V1::BaseController < ActionController::API
 
   def user_not_authorized(exception)
     render json: {
-      error: "You are not authorized to perform this action: #{exception.policy.class.to_s.underscore.camelize}.#{exception.query}"
+      error: "You are not authorized to perform this action."
     }, status: :unauthorized
   end
 

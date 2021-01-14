@@ -3,10 +3,25 @@ class Api::V1::OutfitsController < Api::V1::BaseController
   before_action :set_outfit, only: %i[show update destroy]
 
   def index
-    @outfits = policy_scope(Outfit)
+    if params[:categories]
+      @outfits = policy_scope(Outfit).joins(:categories).where(categories: { id: JSON.parse(params[:categories]) }).distinct
+
+      ########################
+      # NOTE: 
+      # if displaying non selected categories is not necessary anymore,
+      # this query would be faster
+      # 
+      # @outfits = policy_scope(Outfit)
+      #            .includes(:categories, :items)
+      #            .where(categories: { id: JSON.parse(params[:categories]) })
+      ########################
+    else
+      @outfits = policy_scope(Outfit).includes(:categories, :items)
+    end
   end
 
   def show
+    @last_date_worn = @outfit.worn.empty? ? nil : @outfit.worn.where(rejected: false).last.created_at
   end
 
   def update

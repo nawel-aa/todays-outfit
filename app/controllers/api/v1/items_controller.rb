@@ -7,6 +7,7 @@ class Api::V1::ItemsController < Api::V1::BaseController
   end
 
   def show
+    @last_date_worn = @item.worn.empty? ? nil : @item.worn.where(rejected: false).last.created_at
   end
 
   def update
