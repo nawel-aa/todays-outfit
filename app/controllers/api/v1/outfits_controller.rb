@@ -18,8 +18,6 @@ class Api::V1::OutfitsController < Api::V1::BaseController
     # Set the relationships
     change_outfit_relationships
 
-    authorize @outfit
-
     if @outfit.save
       render json: { success: "The outfit ##{@outfit.id} has been updated." }
     else
@@ -44,7 +42,6 @@ class Api::V1::OutfitsController < Api::V1::BaseController
   end
 
   def destroy
-    authorize @outfit
     @outfit.destroy
     head :no_content
   end
@@ -57,7 +54,7 @@ class Api::V1::OutfitsController < Api::V1::BaseController
   end
 
   def change_outfit_relationships
-    @outfit.user = current_user if @outfit.user.nil?
+    @outfit.user = current_user
     @outfit.items = Item.find(params[:items])
     @outfit.categories = Category.find(params[:categories])
   end
